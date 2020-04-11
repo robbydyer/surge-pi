@@ -1,3 +1,3 @@
 #!/bin/bash
 
-docker run -it --expose 80 surge-pi
+docker run -d --publish 80:80 surge-pi bash
