@@ -34,11 +34,11 @@ var data = 0;
 			}
 			else if ( !(data.localeCompare("fail"))) {
 				alert ("Something went wrong!" );
-				return ("fail");			
+				return ("fail");
 			}
 			else {
 				alert ("Something went wrong!" );
-				return ("fail"); 
+				return ("fail");
 			}
 		}
 		//test if fail
