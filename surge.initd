@@ -1,0 +1,23 @@
+#!/bin/bash
+### BEGIN INIT INFO
+# Provides:          surge
+# Required-Start:    $remote_fs $syslog
+# Required-Stop:     $remote_fs $syslog
+# Default-Start:     5
+# Default-Stop:      0 1 6
+# Short-Description: Starts surge containers
+# Description:       Starts surge containers
+### END INIT INFO
+set -euo pipefail
+
+SURGEHOME="/home/pi/surge-pi"
+
+case "$1" in
+start)
+  cd "${SURGEHOME}"
+  ./run.sh
+  ;;
+stop)
+  docker kill surge
+  ;;
+esac
