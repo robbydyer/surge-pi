@@ -18,14 +18,13 @@
 	}
 	//for loop to read the value
 	for ($i = 0; $i < 8; $i++) {
-    $num = $i + 1;
 		//if off
-		if ($val_array[$i][0] == 0 ) {
-			echo ("<img id='button_".$num."' src='data/img/red/red_".$num.".jpg' onclick='change_pin (".$i.");'/>");
+		if ($val_array[$i][0] == 1 ) {
+			echo ("<img id='button_".$i."' src='data/img/red/red_".$i.".jpg' onclick='change_pin (".$i.");'/>");
 		}
 		//if on
-		if ($val_array[$i][0] == 1 ) {
-			echo ("<img id='button_".$num."' src='data/img/green/green_".$num.".jpg' onclick='change_pin (".$i.");'/>");
+		if ($val_array[$i][0] == 0 ) {
+			echo ("<img id='button_".$i."' src='data/img/green/green_".$i.".jpg' onclick='change_pin (".$i.");'/>");
 		}	 
 	}
 ?>

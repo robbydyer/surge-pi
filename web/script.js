@@ -1,7 +1,4 @@
-﻿//TheFreeElectron 2015, http://www.instructables.com/member/TheFreeElectron/
-//JavaScript, uses pictures as buttons, sends and receives values to/from the Rpi
-//These are all the buttons
-var button_0 = document.getElementById("button_0");
+﻿var button_0 = document.getElementById("button_0");
 var button_1 = document.getElementById("button_1");
 var button_2 = document.getElementById("button_2");
 var button_3 = document.getElementById("button_3");
@@ -20,23 +17,20 @@ var data = 0;
 //this is the http request
 	var request = new XMLHttpRequest();
 	request.open( "GET" , "gpio.php?pic=" + pic, true);
-	request.send(null);
+	request.send();
 	//receiving informations
 	request.onreadystatechange = function () {
 		if (request.readyState == 4 && request.status == 200) {
 			data = request.responseText;
 			//update the index pic
-			if ( !(data.localeCompare("0")) ){
+			if ( data.localeCompare("0") ){
 				Buttons[pic].src = "data/img/red/red_"+pic+".jpg";
-			}
-			else if ( !(data.localeCompare("1")) ) {
+			} else if ( data.localeCompare("1") ) {
 				Buttons[pic].src = "data/img/green/green_"+pic+".jpg";
-			}
-			else if ( !(data.localeCompare("fail"))) {
+			} else if ( !(data.localeCompare("fail"))) {
 				alert ("Something went wrong!" );
 				return ("fail");
-			}
-			else {
+			} else {
 				alert ("Something went wrong!" );
 				return ("fail");
 			}

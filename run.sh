@@ -1,5 +1,8 @@
 #!/bin/bash
 # Run this on the Raspberry-pi to start the container
+set -euo pipefail
+
+ROOT="$(git rev-parse --show-toplevel)"
 
 if ! dpkg -l | grep docker.io; then
   apt-get update
@@ -12,7 +15,7 @@ if [ ! -f /etc/init.d/surge-pi ] || ! diff /etc/init.d/surge-pi surge.initd &> /
   chmod 755 /etc/init.d/surge-pi
 fi
 
-c="surge-pi"
+c="surge"
 if docker inspect "${c}" &> /dev/null; then
   echo "=> Killing container ${c}"
   docker kill "${c}"
@@ -20,8 +23,11 @@ fi
 docker rm "${c}"
 
 docker run -d \
-  --name surge \
+  --name "${c}" \
   --privileged \
+  --restart=unless-stopped \
   --publish 8080:80 \
+  -v "${ROOT}/web:/var/www/html" \
+  -e APACHE_RUN_USER=root \
   surge-pi \
-  bash -cex "while true; do sleep 6000; done"
+  bash -cex "service apache2 start ; while true; do sleep 6000; done"
