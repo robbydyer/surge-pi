@@ -3,28 +3,29 @@
 <html>
     <head>
         <meta charset="utf-8" />
-        <title>Raspberry Pi Gpio</title>
+        <title>Surge</title>
+        <link rel="stylesheet" type="text/css" href="style.css">
     </head>
  
-    <body style="background-color: black;">
-    <!-- On/Off button's picture -->
+    <body style="background-color: DimGrey;">
+
 <?php
 	$val_array = array(0,0,0,0,0,0,0,0);
-	//this php script generate the first page in function of the file
+
 	for ( $i= 0; $i<8; $i++) {
-		//set the pin's mode to output and read them
+
 		system("gpio mode ".$i." out");
 		exec ("gpio read ".$i, $val_array[$i], $return );
 	}
-	//for loop to read the value
+
 	for ($i = 0; $i < 8; $i++) {
 		//if off
 		if ($val_array[$i][0] == 1 ) {
-			echo ("<img style='max-width: 100%' id='button_".$i."' src='data/img/red/red_".$i.".png' onclick='change_pin (".$i.");'/>");
+			echo ("<img class='center' id='button_".$i."' src='data/img/red/red_".$i.".png' onclick='change_pin (".$i.");'/><br>");
 		}
 		//if on
 		if ($val_array[$i][0] == 0 ) {
-			echo ("<img style='max-width: 100%' id='button_".$i."' src='data/img/green/green_".$i.".png' onclick='change_pin (".$i.");'/>");
+			echo ("<img class='center' id='button_".$i."' src='data/img/green/green_".$i.".png' onclick='change_pin (".$i.");'/>");
 		}	 
 	}
 ?>
