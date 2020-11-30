@@ -20,13 +20,15 @@ if docker inspect "${c}" &> /dev/null; then
   echo "=> Killing container ${c}"
   docker kill "${c}"
 fi
+set +e
 docker rm "${c}"
+set -e
 
 docker run -d \
   --name "${c}" \
   --privileged \
   --restart=unless-stopped \
-  --publish 8080:80 \
+  --publish 80:80 \
   -v "${ROOT}/web:/var/www/html" \
   -e APACHE_RUN_USER=root \
   surge-pi \
